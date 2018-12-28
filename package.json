@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "emailenews api server",
+  "main": "index.js",
+  "engines": {
+    "node": "10.15.0",
+    "npm": "6.5.0"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "emailenews"
+  ],
+  "author": "ecosyn",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9"
+  }
+}
