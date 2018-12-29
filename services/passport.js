@@ -20,8 +20,9 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleSecretKey,
-      callbackURL: "/auth/google/callback",
-      proxy: true
+      callbackURL:
+        "https://calm-journey-39690.herokuapp.com/auth/google/callback"
+      //proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleID: profile.id }).then(excitingUser => {
