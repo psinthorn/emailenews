@@ -25,6 +25,12 @@ module.exports = app => {
     res.status(200).send("You logout succcesfully");
   });
 
+  app.get("/env", (req, res) => {
+    console.log(process.env.MONGO_URI);
+    console.log(process.env.GOOGLE_CLIENT_ID);
+    console.log(process.env.GOOGLE_SECRET_KEY);
+  });
+
   // app.get("/auth/google/callback", (req, res) => {
   //   res.send({ sayHi: "Hello google this is my callback uri" });
   // });
