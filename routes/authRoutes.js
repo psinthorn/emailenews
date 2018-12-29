@@ -11,8 +11,10 @@ module.exports = app => {
   app.get("/auth/google/callback", passport.authenticate("google"));
 
   app.get("/api/current_user", (req, res) => {
+    console.log(req.user);
+    console.log(req.session);
     if (!req.user) {
-      res.status(200).send("Please singin");
+      res.status(200).send("Please Sing in");
     } else {
       res.send(req.user);
     }
