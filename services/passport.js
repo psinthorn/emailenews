@@ -23,16 +23,37 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleID: profile.id }).then(excitingUser => {
-        if (excitingUser) {
-          done(null, excitingUser);
-        } else {
-          new User({ googleID: profile.id }).save().then(newUser => {
-            done(null, newUser);
-          });
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const excitingUser = await User.findOne({ googleID: profile.id });
+      if (excitingUser) {
+        return done(null, excitingUser);
+      }
+      const newUser = await new User({ googleID: profile.id }).save();
+      done(null, newUser);
     }
   )
 );
+
+//#if you need to use Async/Await you can refactoring code as below
+// async (accessToken, refreshToken, profile, done) => {
+//   const excitingUser = await User.findOne({ googleID: profile.id });
+//   if (excitingUser) {
+//     done(null, excitingUser);
+//   } else {
+//     const newUser = await new User({ googleID: profile.id }).save();
+//     done(null, newUser);
+//   }
+// }
+
+//#Use traditional Promise
+// (accessToken, refreshToken, profile, done) => {
+//   User.findOne({ googleID: profile.id }).then(excitingUser => {
+//     if (excitingUser) {
+//       done(null, excitingUser);
+//     } else {
+//       new User({ googleID: profile.id }).save().then(newUser => {
+//         done(null, newUser);
+//       });
+//     }
+//   });
+// }
