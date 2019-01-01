@@ -6,7 +6,7 @@ export const NotFound = () => {
       <h2>
         <span className="red-text">404 </span>Page Not Found
       </h2>
-      <p>Sorry no page found :( </p>
+      <p>Hey! the page you try to find is not found, Sorry </p>
     </div>
   );
 };

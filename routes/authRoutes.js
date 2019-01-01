@@ -17,8 +17,8 @@ module.exports = app => {
   );
 
   app.get("/api/current_user", (req, res) => {
-    console.log(req.user);
-    console.log(req.session);
+    //console.log(req.user);
+    //console.log(req.session);
     if (!req.user) {
       res.status(200).send("Please Sing in");
     } else {

@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const keys = require("./configs/keys");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
@@ -24,6 +25,8 @@ mongoose
 
 const app = express();
 
+app.use(bodyParser.json());
+
 app.use(
   cookieSession({
     //this max age of cookie set to 30days
@@ -42,10 +45,32 @@ app.get("/", (req, res) => {
   res.status(200).send({ say: "Hello to 2nd Edited" });
 });
 
+// #####################
+// #*******************#
+// # Routes section    #
+// #####################
+
+// #Traditional syntax
 authRoutes(app);
+
+// #es2015 syntax
+require("./routes/billingRoutes")(app);
+
+// ######################
+// # End Routes Section #
+// ######################
 
 // or use syntaxt below for routes import and execute
 //require("./services / passport")(app);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 8008;
 app.listen(PORT, () => {

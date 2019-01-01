@@ -3,5 +3,7 @@ module.exports = {
     "876728259524-684ejupkro3v3j1eh9ape8a6ut419q2c.apps.googleusercontent.com",
   googleSecretKey: "CANd4_9K6sixIrtwqMWbcUl3",
   mongoURI: "mongodb://f2:f2111223@ds145484.mlab.com:45484/emailenews-dev",
-  cookieKey: "thisissecretkeyforcookekesgenerate"
+  cookieKey: "thisissecretkeyforcookekesgenerate",
+  stripePublishableKey: "pk_test_K0eXuUdzJ7FrRDJRw7J8pMCE",
+  stripeSecretKey: "sk_test_BEIVdZbq3EVbXk8VwzomoPmA"
 };

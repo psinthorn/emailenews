@@ -1,51 +1,69 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import StripePayment from "./../components/payments/StripePayment";
 
 class Header extends React.Component {
   renderHeader() {
-    switch (this.props.auth.userId) {
+    //console.log("auth status", typeof this.props.auth._id);
+    switch (this.props.auth._id) {
       case null:
         return <div>Loading...</div>;
+      case undefined:
+        return (
+          <li>
+            {" "}
+            <a href="/auth/google">Sign In With Google</a>
+          </li>
+        );
       case false:
         return (
+          <li>
+            {" "}
+            <a href="/auth/google">Sign In With Google</a>
+          </li>
+        );
+      default:
+        return (
           <React.Fragment>
-            <li>
-              <Link to="/auth/google">About</Link>
+            <li key="1">
+              <StripePayment />
             </li>
-            <li>
-              <Link to="/contact">Contact</Link>;
+
+            <li key="2">
+              <div style={{ margin: "0 5px" }}>
+                Credits: {this.props.auth.credits}{" "}
+              </div>
             </li>
-            <li>
-              <a href="/auth/google">Sign In With Google</a>;
+
+            <li key="3">
+              <a href="/api/signout">Sign Out -></a>
             </li>
           </React.Fragment>
         );
 
-      default:
-        return (
-          <React.Fragment>
-            <li>
-              <a href="sass.html">Add Credits</a>
-            </li>
-            <li>
-              <a href="badges.html">Credits</a>
-            </li>
-            <li>
-              <a href="/api/signout">Sign Out</a>
-            </li>
-          </React.Fragment>
-        );
+      // return [
+      //   <li key="1">
+      //     <StripePayment />
+      //   </li>,
+      //   <li key="2">
+      //     <div style={{ margin: "0 5px" }}>
+      //       Credits: {this.props.auth.credits}{" "}
+      //     </div>
+      //   </li>,
+      //   <li key="3">
+      //     <a href="/api/signout">Sign Out -></a>
+      //   </li>
+      // ];
     }
   }
   render() {
-    console.log(this.props);
     return (
       <div className="container-fluid">
         <nav>
           <div className="container nav-wrapper">
             <Link
-              to={this.props.auth.userId ? "/dashboard" : "/"}
+              to={this.props.auth_id ? "/dashboard" : "/"}
               className="brand-logo"
             >
               EmailEnews
@@ -64,7 +82,4 @@ class Header extends React.Component {
 const mapStateToProps = ({ auth }) => {
   return { auth };
 };
-export default connect(
-  mapStateToProps,
-  {}
-)(Header);
+export default connect(mapStateToProps)(Header);
