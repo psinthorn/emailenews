@@ -41,10 +41,6 @@ app.use(passport.session());
 
 const authRoutes = require("./routes/authRoutes");
 
-app.get("/", (req, res) => {
-  res.status(200).send({ say: "Hello to 2nd Edited" });
-});
-
 // #####################
 // #*******************#
 // # Routes section    #
