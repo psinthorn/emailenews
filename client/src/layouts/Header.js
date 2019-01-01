@@ -13,7 +13,9 @@ class Header extends React.Component {
         return (
           <li>
             {" "}
-            <a href="/auth/google">Sign In With Google</a>
+            <a className="btn red" href="/auth/google">
+              Sign In With Google
+            </a>
           </li>
         );
       case false:
